@@ -1,0 +1,98 @@
+<html layout:decorate="~{Layout}">
+
+<body>
+    <div layout:fragment="content">
+        <nav th:replace="NavBar :: NavBarFragment"></nav>
+
+        <div class="community-content-container" >
+        <!--    글 상세-->
+            <div class="content-line">
+                <div class="content-article">
+                    <div class="content-article-box">
+                        <h1 class="content-article-subject" th:text="${community.subject}"></h1>
+                        <div class="content-article-region">
+                            <div>지역</div>
+                            <div th:text="${community.region}"></div>
+                        </div>
+
+                        <h3 class="content-article-mean" th:text="${community.content}"></h3>
+                        <h5 th:text="${#temporals.format(community.createDate, 'yyyy-MM-dd HH:mm')}"></h5>
+                    </div>
+                </div>
+
+                <div class="content-profile">
+                        <form th:action="@{|/user/${community.author.nickname}|}"  method="post" >
+                            <input type="hidden" th:text="${community.author.nickname}" th:name="userNickname" th:value="${community.author.nickname}">
+                            <input type="submit">
+                        </form>
+                </div>
+            </div>
+        <!--    글 상세 끝-->
+
+        <!--    글 수정 및 삭제-->
+            <div class="content-patch">
+                    <a class="content-edit" th:href="@{|/writer/modify/${community.id}|}"
+                        sec:authorize="isAuthenticated()"
+                        th:if="${community.author != null and #authentication.getPrincipal().getUsername() == community.author.username}"
+                        th:text="수정"></a>
+
+                    <a class="delete" href="javascript:void(0);" th:data-uri="@{|/writer/delete/${community.id}|}"
+                       sec:authorize="isAuthenticated()"
+                       th:if="${community.author != null and #authentication.getPrincipal().getUsername() == community.author.username}"
+                       th:text="삭제"></a>
+            </div>
+            <!--    글 수정 및 삭제 끝-->
+        </div>
+    <!--    코멘트시작-->
+        <div class="comment-container">
+
+            <!--        코멘트 갯수-->
+            <div th:text="|${#lists.size(community.commentList)}개의 답변이 있습니다.|"></div>
+
+            <!--        코멘트 등록-->
+            <div class="comment-writer">
+                <form class="comment-writer-line" th:action="@{|/comment/create/${community.id}|}" th:object="${commentForm}" method="post">
+                    <textarea th:field="*{content}" name="content" id="content" placeholder="댓글을 입력해주세요.">
+                    </textarea>
+                    <input type="submit" value="답변등록">
+<!--                    <div class="alert comment-alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">-->
+<!--                        <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />-->
+<!--                    </div>-->
+                </form>
+            </div>
+
+            <div style="width:800px;" th:each="comment : ${community.commentList}">
+
+                <div th:if="${community.author != null}" th:text="${community.author.nickname}"></div>
+                <div class="comment-date" th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                <div th:text="${comment.content}" style="display:inline-block;"></div>
+                <!--        코멘트 정보 및 내용-->
+                <div class="comment-patch">
+                    <a class="comment-edit"
+                       th:href="@{|/comment/modify/${comment.id}|}"
+                       sec:authorize="isAuthenticated()"
+                       th:if="${comment.author != null and #authentication.getPrincipal().getUsername() == comment.author.username}"
+                       th:text="수정"></a>
+
+                    <a href="javascript:void(0);" th:data-uri="@{|/comment/delete/${comment.id}|}"
+                       class="content-delete delete" sec:authorize="isAuthenticated()"
+                       th:if="${comment.author != null and #authentication.getPrincipal().getUsername() == comment.author.username}"
+                       th:text="삭제"></a>
+                </div>
+
+            </div>
+    </div>
+</body>
+</html>
+<script layout:fragment="script" type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+
+</script>

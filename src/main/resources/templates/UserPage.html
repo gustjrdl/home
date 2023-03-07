@@ -1,0 +1,10 @@
+<div>앵간하네</div>
+
+<div th:each="Community: ${community}">
+
+    <div th:if="${Community.author.nickname} == ${userData}">
+            <div th:text="${Community.content}"></div>
+            <div th:text="${Community.author.nickname}"></div>
+        </div>
+    </div>
+</div>

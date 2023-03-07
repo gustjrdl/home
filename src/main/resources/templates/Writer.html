@@ -1,0 +1,70 @@
+<html layout:decorate="~{Layout}">
+
+
+<div layout:fragment="content">
+    <nav th:replace="SignNavBar :: SignNavBarFragment"></nav>
+<!--텍스트-->
+    <div class="writer-template">
+    <!--      제목-->
+        <form class="writer-article" th:object="${communityForm}"method="post" enctype="multipart/form-data">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <div class="writer-article-region">
+                <div class="writer-article-region-line">
+                    <div th:if="${#fields.hasAnyErrors()}">
+                        <div class="alert" role="alert" th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+                    </div>
+                    <input type="radio" value="인천" class="incheon" name="인천" id="incheon" th:field="*{region}">인천</input>
+                    <input type="radio" th:value="서울" class="seoul" name="region" id="seoul" th:field="*{region}">서울</input>
+                    <input type="radio" th:value="대전" class="daejeon" name="region" id="daejeon" th:field="*{region}">대전</input>
+                    <input type="radio" th:value="대구" class="daegu" name="region" id="daegu" th:field="*{region}">대구</input>
+                    <input type="radio" th:value="부산" class="busan" name="region" id="busan" th:field="*{region}">부산</input>
+                    <input type="radio" th:value="충남" class="chungnam" name="region" id="choongnam" th:field="*{region}">충남</input>
+                    <input type="radio" th:value="충북" class="chungbuk" name="region" id="choongbook" th:field="*{region}">충북</input>
+                    <input type="radio" th:value="제주도" class="jeju" name="region" id="jeju" th:field="*{region}">제주</input>
+                    <input type="radio" th:value="강원도" class="kangwon" name="region" id="kangwondo" th:field="*{region}">강원</input>
+                    <input type="radio" th:value="전북" class="jeonbuk" name="region" id="jeonbook" th:field="*{region}">전북</input>
+                    <input type="radio" th:value="전주" class="jeonju" name="region" id="jeonju" th:field="*{region}">전주</input>
+                    <input type="radio" th:value="세종" class="sejong" name="region" id="sejong" th:field="*{region}">세종</input>
+                    <input type="radio" th:value="울산" class="ulsan" name="region" id="ulsan" th:field="*{region}">울산</input>
+                    <input type="radio" th:value="광주" class="gwangju" name="region" id="gwangju" th:field="*{region}">광주</input>
+                    <input type="radio" th:value="경상남도" class="gyungnam" name="region" id="gyungsangnamdo" th:field="*{region}">경남</input>
+                    <input type="radio" th:value="경상북도" class="gyungbuk" name="region" id="gtungsangbookdo" th:field="*{region}">경북</input>
+
+
+                    <a id="button"></a>
+                </div>
+            </div>
+
+            <textarea class="writer-article-subject" type="text" name="subject" id="subject" th:field="*{subject}"></textarea>
+    <!--        내용-->
+            <textarea class="writer-article-content" name="content" id="content" th:field="*{content}"></textarea>
+
+<!--            <input id="files" type="file" name="files" multiple="multiple" class="select-image" accept="img/webp">-->
+    <!--        저장하기버튼-->
+            <input class="writer-submit-button"type="submit" value="저장하기">
+
+        </form>
+    </div>
+    <script type="text/javascript">
+
+    const formData = new FormData();
+
+    const files = document.getElementById("files");
+    const subject = document.getElementById("subject");
+    const content = document.getElementById("content");
+
+    formData.append("files",files);
+    formData.append("subject",subject);
+    formData.append("content",content);
+
+    files.onchange = function(e) {
+
+        for(let i = 0; i<e.target.files.length; i++){
+            formData.append("files",e.target.files[i]);
+            console.log(e.target.files[i]);
+        }
+    }
+    </script>
+</div>
+
+</html>

@@ -1,0 +1,44 @@
+<html layout:decorate="~{Layout}">
+
+<body>
+<div layout:fragment="content">
+    <nav th:replace="SignNavBar :: SignNavBarFragment"></nav>
+    <div style="0 auto 20px auto; font-weight:bold; font-size:30px; text-align:center;">회원가입</div>
+    <div style="display:flex; justify-content:center;">
+        <form th:action="@{/user/signup}" th:object="${userCreateForm}" method ="post" style=" display:flex; justify-content:center; flex-wrap:wrap; width:330px;">
+                <label for="username"></label>
+                <input type="text" id="username" th:field="*{username}" placeholder="아이디를 입력 하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px; margin-bottom:30px; background-color:#f5f6f7; font-family: 'Do Hyeon', sans-serif;">
+                <div th:if="${#fields.hasErrors('username')}" style="margin-top:-30px;">
+                    <p th:errors="*{username}" style="color:red; font-size:14px; font-family: 'Do Hyeon', sans-serif;"></p>
+                </div>
+                <label for="password1"></label>
+                <input type="password" id="password1" th:field="*{password1}"  placeholder="비밀번호를 입력 하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px; margin-bottom:30px; background-color:#f5f6f7; font-family: 'Do Hyeon', sans-serif;">
+                <div th:if="${#fields.hasErrors('password1')}" style="margin-top:-30px;">
+                    <p th:errors="*{password1}" style="color:red; font-size:14px; font-family: 'Do Hyeon', sans-serif;"></p>
+                </div>
+                <label for="password2"></label>
+                <input type="password" id="password2" th:field="*{password2}"  placeholder="비밀번호를 다시 한 번 입력하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px; margin-bottom:30px; background-color:#f5f6f7; font-family: 'Do Hyeon', sans-serif;">
+                <div th:if="${#fields.hasErrors('password2')}" style="margin-top:-30px;">
+                    <p th:errors="*{password2}" style="color:red; font-size:14px; font-family: 'Do Hyeon', sans-serif;"></p>
+                </div>
+                <label for="email"></label>
+                <input type="text" id="email" th:field="*{email}" placeholder="이메일을 입력 하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px; margin-bottom:30px; background-color:#f5f6f7; font-family: 'Do Hyeon', sans-serif;">
+                <div th:if="${#fields.hasErrors('email')}" style="margin-top:-30px;">
+                    <p th:errors="*{email}" style="color:red; font-size:14px;  font-family: 'Do Hyeon', sans-serif;"></p>
+                </div>
+                <label for="nickname"></label>
+                <input type="text" id="nickname" th:field="*{nickname}" placeholder="닉네임을 입력 하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px; margin-bottom:30px; background-color:#f5f6f7; font-family: 'Do Hyeon', sans-serif;">
+                <div th:if="${#fields.hasErrors('nickname')}" style="border:solid 2px red; margin-top:-30px; padding:0; display:inline-block;">
+                    <div th:errors="*{nickname}" style="color:red; font-size:14px; font-family:'Do Hyeon', sans-serif; border:solid 2px blue"></div>
+                </div>
+                <button class="btn btn-primary" type="submit"  style=" margin-top:30px; width:300px; height: 58px; border-radius:5px; font-weight:bold;
+                                        font-size: 30px; background-color:#00ce7c; font-family: 'Do Hyeon', sans-serif; color:white; padding:5px; " >회원가입
+                </button>
+        </form>
+    </div>
+</div>
+<script src="/bootstrap/js/createform.js"></script>
+<script src="/bootstrap/js/signup.js"></script>
+</body>
+</html>
+

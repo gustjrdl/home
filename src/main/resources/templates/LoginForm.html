@@ -1,0 +1,41 @@
+<html layout:decorate="~{Layout}">
+
+
+<body>
+<div layout:fragment="content">
+    <nav th:replace="SignNavBar :: SignNavBarFragment"></nav>
+        <div style="margin:0 auto 20px auto; font-weight:bold; font-size:30px; text-align:center;">로그인</div>
+            <div style="margin:0 auto; display:flex; justify-content:center;">
+            <form th:action="@{/user/login}" method ="post" style="display:inline-block;">
+                <div class="form-outline mb-4" style="text-align:center;">
+                    <label for="username"></label>
+                    <input type="text" name="username" id="username" placeholder="아이디를 입력 하세요" style="width:330px; height: 60px; border-radius:5px; border:1px solid gray; padding: 10px; font-family: 'Do Hyeon', sans-serif;">
+                </div>
+                <div class="form-outline mb-4" style="text-align: center;">
+                    <label for="password"></label>
+                    <input type="password" name="password" id="password" placeholder="비밀번호를 입력 하세요" style="width:330px; height: 60px; border-radius:5px; border:1px solid gray; padding: 10px; font-family: 'Do Hyeon', sans-serif;">
+                </div>
+
+                <div th:if="${param.error}" class="mb-2">
+                    <div class="alert alert-danger" style="width:330px; height: 50px; border-radius:5px; font-size:15px; margin:0 auto;">아이디와 비밀번호를 확인해주세요.</div>
+                </div>
+
+                <div class="d-flex justify-content-center" style="text-align:center; box-shadow:none;">
+<!--                    <a class="nav-link" th:href="@{/main}" style="width:327px; height: 58px; border-radius:5px; font-weight:bold; font-size: 20px; background-color:#00ce7c; color:white; font-family: 'Do Hyeon', sans-serif;">-->
+<!--                        로그인</a>-->
+                    <button type="submit" style="width:330px; height: 60px; border-radius:5px; font-weight:bold; font-size: 20px; background-color:#00ce7c; color:white; font-family: 'Do Hyeon', sans-serif; border:1px solid white;
+            " >로그인</button>
+                </div>
+                <div style="font-family: 'Do Hyeon', sans-serif; font-size:15px; width:330px; height:20px; text-align:right; margin-left:auto; margin-right:auto; margin-top:10px;">
+                    <a class="nav-link" th:href="@{/user/signup}">회원가입</a>
+                </div>
+                <div style="width:500px; margin-left:auto; margin-right:auto; margin-top:1px;">
+                    <img src="/bootstrap/img/로그인캐릭터.jpeg" alt="" style="margin-bottom:60px;">
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</body>
+</html>

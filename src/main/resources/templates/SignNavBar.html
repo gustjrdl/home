@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+
+<body>
+<th:block th:fragment="SignNavBarFragment">
+  <div class="sign-header">
+    <div class="sign-home-container">
+      <nav class="sign-home-logo">
+        <a class="nav-link" th:href="@{/main}">Trip Soda</a>
+      </nav>
+      <nav class="sign-navbar">
+        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}" style=" font-weight:bold; font-size:18px;">로그인</a>
+        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/signup}" style="font-weight:bold; font-size:18px; " >회원가입</a>
+        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}" style=" font-weight:bold; font-size:18px;">로그아웃</a>
+        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/mypage}" style=" font-weight:bold; font-size:18px; ">마이페이지</a>
+        <button class="sign-writer-button" th:onclick="|location.href='@{/writer/content}'|"> 글쓰기</button>
+      </nav>
+    </div>
+  </div>
+</th:block>
+</body>
+</html>
