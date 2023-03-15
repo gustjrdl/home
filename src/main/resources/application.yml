@@ -14,7 +14,7 @@ spring:
     username: root
     password:
   jpa:
-
+g
     hibernate:
       ddl-auto: update
     properties:
