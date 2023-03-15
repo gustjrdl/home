@@ -32,29 +32,35 @@ public class CommentService {
         this.commentRepository.save(cmt);
     }
 
-//    public Page<Comment> getList(int page, int id) {
-//        List<Sort.Order> sorts = new ArrayList<>();
-//        sorts.add(Sort.Order.desc("createDate"));
-//        Pageable pageable = PageRequest.of(page, 20, Sort.by(sorts));
-//
-//        return this.commentRepository.findAll(pageable);
-//    }
+    public Page<Comment> getList(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
 
-    public List<Comment> getComment(CommentForm commentForm, int id) {
-
-        commentForm.getContent();
-
-        return this.commentRepository.findAllById(id);
+        return this.commentRepository.findAll(pageable);
     }
 
-    public void modify(List<Comment> comment, String content, int id) {
-        comment.get(id).setContent(content);
-        comment.get(id).setModifyDate(LocalDateTime.now());
-        this.commentRepository.save(comment.get(id));
+
+
+
+    public Comment getComment(Integer id) {
+        Optional<Comment> comment = this.commentRepository.findById(id);
+        if (comment.isPresent()) {
+            return comment.get();
+        } else {
+            throw new DataNotFoundException("comment not found");
+        }
     }
 
-    public void delete(List<Comment> comment,int id) {
-        this.commentRepository.delete(comment.get(id));
+    public void modify(Comment comment, String content) {
+        comment.setContent(content);
+        comment.setModifyDate(LocalDateTime.now());
+        this.commentRepository.save(comment);
+    }
+
+    public void delete(Comment comment) {
+
+        this.commentRepository.delete(comment);
     }
 
 }

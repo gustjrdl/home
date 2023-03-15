@@ -23,6 +23,7 @@ public class MyPageController {
     private final CommunityService communityService;
 
 
+
     @RequestMapping("/mypage")
     private String mypageform(Model model, Principal principal, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
 

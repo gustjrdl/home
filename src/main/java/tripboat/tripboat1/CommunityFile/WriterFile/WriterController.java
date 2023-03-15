@@ -38,8 +38,6 @@ public class WriterController {
     @Autowired
     private final CommunityService communityService;
     private final UserService userService;
-//    private final ArticleImageService articleImageService;
-//    private final AwsService awsService;
 
     @RequestMapping("/content")
     private String WriterSearch(Model model, @RequestParam("file") List<MultipartFile> file, @RequestParam(value="page", defaultValue="1") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
@@ -95,6 +93,7 @@ public class WriterController {
     @GetMapping("/modify/{id}")
     public String communityModify(CommunityForm communityForm, @PathVariable("id") Integer id, Principal principal) {
         Community community = this.communityService.getCommunity(id);
+
         if(!community.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }

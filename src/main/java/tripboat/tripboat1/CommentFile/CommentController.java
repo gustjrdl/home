@@ -51,48 +51,52 @@ public class CommentController {
         }
 
         this.commentService.create(community, content, siteUser);
+
         return String.format("redirect:/community/detail/%s", id);
     }
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String commentModify(CommentForm commentForm, @PathVariable("id") Integer id, @RequestParam(value="page", defaultValue="0") int page, Principal principal) {
+    public String commentModify(CommentForm commentForm, @PathVariable("id") Integer id ) {
 
-        List<Comment> comment = this.commentService.getComment(commentForm, id);
+        Comment comment = this.commentService.getComment(id);
+
         return "CommentEdit";
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
-    public String commentModify(@Valid CommentForm commentForm, BindingResult bindingResult,
+    public String commentModify(@Valid CommentForm commentForm,
+                                @RequestParam(value="page", defaultValue="0") int page,
+                                BindingResult bindingResult,
                                @PathVariable("id") Integer id, Principal principal) {
 
         if (bindingResult.hasErrors()) {
             return "CommentEdit";
         }
 
-        List<Comment> comment = this.commentService.getComment(commentForm,id);
+        Comment comment = this.commentService.getComment(id);
 
-        if (!comment.get(id).getAuthor().getUsername().equals(principal.getName())) {
+        if (!comment.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
 
-        this.commentService.modify(comment, commentForm.getContent(),id);
+        this.commentService.modify(comment, commentForm.getContent());
 
-        return String.format("redirect:/community/detail/%s", comment.get(id).getCommunity().getId());
+        return String.format("redirect:/community/detail/%s", comment.getCommunity().getId());
     }
 
-//    @PreAuthorize("isAuthenticated()")
-//    @GetMapping("/delete/{id}")
-//    public String answerDelete(Principal principal, @PathVariable("id") Integer id, @RequestParam(value="page", defaultValue = "0") int page) {
-//
-//        Page<Comment> comment = this.commentService.getList(page, id);
-//
-//
-//        if (!comment.getContent().get(id).getAuthor().getUsername().equals(principal.getName())) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
-//        }
-//        this.commentService.delete();
-//        return String.format("redirect:/community/detail/%s", comment.get().getCommunity().getId());
-//    }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String commentDelete(Principal principal, @PathVariable("id") Integer id) {
+
+        Comment comment = this.commentService.getComment(id);
+
+        if (!comment.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+        this.commentService.delete(comment);
+
+        return String.format("redirect:/community/detail/%s", comment.getCommunity().getId());
+    }
 
 }

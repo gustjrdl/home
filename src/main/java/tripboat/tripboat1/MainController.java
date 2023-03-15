@@ -15,13 +15,13 @@ import tripboat.tripboat1.CommunityFile.CommunityService;
 @RequiredArgsConstructor
 @RequestMapping("")
 public class MainController {
-//    @Autowired
-//    private final CommunityService communityService;
-    @RequestMapping("/main")
+    @Autowired
+    private final CommunityService communityService;
+    @RequestMapping(value = {"/main",""})
     public String main (Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
-//        Page<Community> paging = this.communityService.getList(page, kw);
-//        model.addAttribute("kw", kw);
-//        model.addAttribute("paging", paging);
+        Page<Community> paging = this.communityService.getList(page, kw);
+        model.addAttribute("kw", kw);
+        model.addAttribute("paging", paging);
         return "Index";
     }
 
