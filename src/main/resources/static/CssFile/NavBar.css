@@ -12,6 +12,7 @@
     align-items:space-between;
     justify-content:space-between;
     flex-wrap:wrap;
+    min-width:600px;
     max-width:1200px;
     height:140px;
     margin:0 auto;
@@ -45,6 +46,7 @@
     background-color:#00ce7c;
     width:100px;
     height:40px;
+    padding-top:5px;
     color:white;
     font-size:20px;
     font-weight:bold;
@@ -56,11 +58,20 @@
     width:1200px;
     display:flex;
     justify-content:space-between;
+
+
 }
-.bottom-navbar > div> a:nth-child(1) {
+.bottom-navbar > div {
+    display:flex;
+    align-items:center;
+}
+
+.bottom-navbar > div > a:nth-child(1) {
     font-size:20px;
     margin-left:20px;
     margin-right:10px;
+
+
 
 }
 .bottom-navbar > div > a:nth-child(2) {
@@ -68,26 +79,23 @@
     margin-left:20px;
 }
 
-.search-bar {
-position:absolute;
-right:30px;
 
-}
-.search-text {
-    position:absolute;
+.search-bar {
     display:flex;
     align-items:center;
+    margin-right:20px;
+
 }
+
 .search-content {
-    position:relative;
     width:100%;
 }
 .search-button{
-    position:absolute;
     right:10px;
     height:30px;
     border:none;
     color:#00CE7C
+
 }
 
 

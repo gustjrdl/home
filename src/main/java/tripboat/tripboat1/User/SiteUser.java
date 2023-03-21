@@ -1,5 +1,6 @@
 package tripboat.tripboat1.User;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,5 +28,16 @@ public class SiteUser {
 
     @Column(unique = true)
     private String nickname;
+
+//    @Column
+//    private String region;
+//
+//    @Column
+//    private byte age;
+//
+//    @Column
+//    private String sex;
+
+
 
 }

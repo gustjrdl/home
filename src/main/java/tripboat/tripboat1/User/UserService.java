@@ -20,6 +20,7 @@ public class UserService {
         user.setUsername(username);
         user.setEmail(email);
         user.setNickname(nickname);
+
         user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
         return user;

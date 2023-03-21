@@ -21,10 +21,15 @@
                 </div>
 
                 <div class="content-profile">
-                        <form th:action="@{|/user/${community.author.nickname}|}"  method="post" >
-                            <input type="hidden" th:text="${community.author.nickname}" th:name="userNickname" th:value="${community.author.nickname}">
-                            <input type="submit">
-                        </form>
+                    <div class="profile-name">
+                        <div>글쓴이:</div>
+                        <div th:text="${community.author.nickname}"></div>
+                    </div>
+
+                    <form th:action="@{|/user/${community.author.nickname}|}"  method="post">
+                        <input type="hidden"  th:name="userNickname" th:value="${community.author.nickname}">
+                        <input class="profile-button nav-link" type="submit" value="프로필">
+                    </form>
                 </div>
             </div>
         <!--    글 상세 끝-->
@@ -79,8 +84,6 @@
                        th:if="${comment.author != null and #authentication.getPrincipal().getUsername() == comment.author.username}"
                        th:text="삭제"></a>
                 </div>
-
-
 
             </div>
         </div>

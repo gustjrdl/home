@@ -14,12 +14,41 @@
     height:100%;
     width:800px;
 }
+
 .content-profile {
     width: 300px;
     height: 300px;
-    border:solid 2px red;
-
+    border:solid 1px grey;
+    padding:20px;
+    display:flex;
+    flex-direction: column;
+    justify-content:space-between;
 }
+
+.profile-name {
+    display:flex;
+}
+
+.profile-name > div {
+    display:inline-block;
+    padding-right:10px;
+}
+
+
+.content-profile > form {
+    display:flex;
+    justify-content:center;
+}
+.profile-button {
+    border:none;
+    background-color:#00CE7C;
+    color:white;
+    border-radius:10px;
+    width:60px;
+    height:32px;
+    padding-top:4px;
+}
+
 .content-article-subject {
     font-size:25px;
 }

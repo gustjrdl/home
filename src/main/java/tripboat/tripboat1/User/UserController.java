@@ -96,7 +96,7 @@ public class UserController {
 
         
 
-        return "/main";
+        return "token";
     }
 
 //    @ResponseBody

@@ -2,10 +2,13 @@ server:
   port: 8084
 
 spring:
-
   devtools:
     livereload:
       enabled: true
+    restart:
+      enabled: true
+    thymeleaf:
+      cache: false
   freemarker:
     cache: false
   datasource:
@@ -13,10 +16,10 @@ spring:
     url: jdbc:mariadb://localhost:3306/travel
     username: root
     password:
+
   jpa:
-g
     hibernate:
-      ddl-auto: update
+      ddl-auto:
     properties:
       hibernate:
         show_sql: true

@@ -5,7 +5,7 @@
 <!--        검색-->
         <div class="home-container">
             <nav class="home-logo">
-                <a class="nav-link" th:href="@{/main}">Trip Soda</a>
+                <a class="nav-link" th:href="@{/main}">TripNotice</a>
             </nav>
 
             <nav class="navbar">
@@ -17,16 +17,16 @@
             </nav>
 
             <div class="bottom-navbar" >
-                <div style="display:flex;">
-                <a class="nav-link" id="homeBtn" th:href="@{/main}">메인</a>
-                <a class="nav-link" id="communityBtn" th:href="@{/community}">커뮤니티</a>
+                <div>
+                    <a class="nav-link" id="homeBtn" th:href="@{/main}">메인</a>
+                    <a class="nav-link" id="communityBtn" th:href="@{/community}">커뮤니티</a>
                 </div>
 
-                <div id="search" class="search-bar" style="height:50px;" >
-                    <div style="width:400px;">
+                <div id="search" class="search-bar">
+                    <div>
                         <div class="search-text">
                             <input class="search-content" type="text" id="search_kw"  th:value="${kw}">
-                            <input class="search-button" value="찾기" type="button" id="btn_search" style="background-color:white;">
+                            <input class="search-button" value="검색" type="button" id="btn_search" style="background-color:white;">
                         </div>
                     </div>
 

@@ -32,6 +32,7 @@ public class CommunityController {
 
         model.addAttribute("kw", kw);
         model.addAttribute("paging", paging);
+
         return "CommunityMain";
     }
     @GetMapping("")
