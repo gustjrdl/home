@@ -18,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/mypage")
 public class MyPageController {
 
     private final UserService userService;
@@ -25,7 +26,7 @@ public class MyPageController {
 
 
 
-    @RequestMapping("/mypage")
+    @RequestMapping("")
     private String mypageform(Model model, Principal principal, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
 
         Page<Community> community = this.communityService.getList(page,kw);
@@ -33,7 +34,6 @@ public class MyPageController {
         model.addAttribute("kw", kw);
         model.addAttribute("name",userService.getUser(principal.getName()));
         model.addAttribute("paging", community);
-
 
         return "MyPage";
     }

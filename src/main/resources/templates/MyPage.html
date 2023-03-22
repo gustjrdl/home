@@ -7,19 +7,25 @@
 
         <div class="mypage-category">
 
-        </div>
-
-        <div class="my-community-container">
-            <div th:each="Community : ${paging}">
-                <div th:if="${name.nickname} == ${Community.author.nickname}">
-                    <a th:href="@{|/community/detail/${Community.id}|}" th:text="${Community.author.nickname}"></a>
-                    <a th:href="@{|/community/detail/${Community.id}|}" th:text="${Community.region}"></a>
-                    <a th:href="@{|/community/detail/${Community.id}|}" th:text="${Community.subject}"></a>
-                    <a th:href="@{|/community/detail/${Community.id}|}" th:text="${Community.content}"></a>
-                </div>
+            <div>
+                <a href="">회원정보</a>
             </div>
-        </div>
+            <div>
+                <a href="">작성글</a>
+                <a href="">글</a>
+                <a href="">코멘트</a>
+            </div>
 
+        </div>
+        <div class="my-community-container">
+            <a th:href="@{|/community/detail/${Community.id}|}" th:each="Community : ${paging}">
+                <div class="my-community-frame" th:if="${name.nickname} == ${Community.author.nickname}">
+                    <div th:text="${Community.region}"></div>
+                    <div  th:text="${Community.subject}"></div>
+                    <div th:href="@{|/community/detail/${Community.id}|}" th:text="${Community.content}"></div>
+                </div>
+            </a>
+        </div>
     </div>
 
 </div>
