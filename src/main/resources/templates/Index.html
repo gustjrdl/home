@@ -1,9 +1,11 @@
 <html layout:decorate="~{Layout}">
 
 <div layout:fragment="content">
+
     <nav th:replace="NavBar :: NavBarFragment"></nav>
+    <div style="width:1200px; margin:50px auto -100px auto;">지역을 고르시면 관련 글들이 검색 돼요</div>
     <div style="text-align:center;">
-        <div style="display:inline-block;">
+        <div style="display:inline-block; margin-left:160px;">
           <svg th:replace="Maps :: mapsfragment"></svg>
         </div>
     </div>

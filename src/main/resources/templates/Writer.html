@@ -28,8 +28,8 @@
                     <input type="radio" th:value="울산" class="ulsan" name="region" id="ulsan" th:field="*{region}">울산</input>
                     <input type="radio" th:value="광주" class="gwangju" name="region" id="gwangju" th:field="*{region}">광주</input>
                     <input type="radio" th:value="경상남도" class="gyungnam" name="region" id="gyungsangnamdo" th:field="*{region}">경남</input>
-                    <input type="radio" th:value="경상북도" class="gyungbuk" name="region" id="gtungsangbookdo" th:field="*{region}">경북</input>
-
+                    <input type="radio" th:value="경상북도" class="gyungbuk" name="region" id="gyungsangbookdo" th:field="*{region}">경북</input>
+                    <input type="text" th:value="테스트" class="test" name="region" id="test" th:field="*{region}">테스트</input>>
 
                     <a id="button"></a>
                 </div>
@@ -43,6 +43,8 @@
     <!--        저장하기버튼-->
             <input class="writer-submit-button"type="submit" value="저장하기">
 
+
+
         </form>
     </div>
     <script type="text/javascript">
@@ -53,17 +55,20 @@
     const subject = document.getElementById("subject");
     const content = document.getElementById("content");
 
+
     formData.append("files",files);
     formData.append("subject",subject);
     formData.append("content",content);
 
     files.onchange = function(e) {
-
         for(let i = 0; i<e.target.files.length; i++){
             formData.append("files",e.target.files[i]);
             console.log(e.target.files[i]);
         }
     }
+
+
+
     </script>
 </div>
 

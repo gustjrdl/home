@@ -24,8 +24,6 @@ public class MyPageController {
     private final UserService userService;
     private final CommunityService communityService;
 
-
-
     @RequestMapping("")
     private String mypageform(Model model, Principal principal, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
 
@@ -37,7 +35,6 @@ public class MyPageController {
 
         return "MyPage";
     }
-
     @GetMapping("/user/{id}")
     private String seeUser(Model model,@RequestParam(value = "page", defaultValue = "0") int page,
                            @RequestParam(value = "kw", defaultValue = "") String kw) {
@@ -47,6 +44,7 @@ public class MyPageController {
         model.addAttribute("community", communityPage);
         return "UserPage";
     }
+
 
     @PostMapping("/user/{id}")
     private String userPage(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
