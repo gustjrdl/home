@@ -1,5 +1,4 @@
 <html layout:decorate="~{Layout}">
-
 <body>
     <div layout:fragment="content">
         <nav th:replace="NavBar :: NavBarFragment"></nav>
@@ -22,11 +21,11 @@
 
                 <div class="content-profile">
                     <div class="profile-name">
-                        <div>글쓴이:</div>
+                        <div>작성자:</div>
                         <div th:text="${community.author.nickname}"></div>
                     </div>
 
-                    <form th:action="@{|/mypage/user/${community.author.nickname}|}"  method="post">
+                    <form th:action="@{|/mypage/user/${community.author.nickname}|}" method="post">
                         <input type="hidden"  th:name="userNickname" th:value="${community.author.nickname}">
                         <input class="profile-button nav-link" type="submit" th:value="프로필">
                     </form>
@@ -95,7 +94,7 @@
 
     Array.from(delete_elements).forEach(function(element) {
         element.addEventListener('click', function() {
-            if(confirm("코멘트를 삭제하시겠습니까?")) {
+            if(confirm("작성 글을 삭제하시겠습니까?")) {
                 location.href = this.dataset.uri;
             };
         });

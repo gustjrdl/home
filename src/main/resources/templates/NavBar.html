@@ -2,38 +2,57 @@
 <body>
 <th:block th:fragment="NavBarFragment">
     <div class="header">
-<!--        검색-->
-        <div class="home-container">
+
+<!--        홈으로 가는 사이트 로고-->
+        <div class="home-container pt-1">
             <nav class="home-logo">
                 <a class="nav-link" th:href="@{/main}">TripNotice</a>
             </nav>
+<!--            로고 끝-->
 
+<!--            로고 라인 상단 내비바-->
             <nav class="navbar">
                     <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}" style=" font-weight:bold; font-size:18px;">로그인</a>
                     <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/signup}" style="font-weight:bold; font-size:18px; " >회원가입</a>
                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}" style=" font-weight:bold; font-size:18px;">로그아웃</a>
                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/mypage}" style=" font-weight:bold; font-size:18px; ">마이페이지</a>
-                    <button class="writer-button" th:onclick="|location.href='@{/writer/content}'|"> 글쓰기</button>
+                    <button class="writer btn" th:onclick="|location.href='@{/writer/content}'|"> 글쓰기</button>
             </nav>
+<!--            상단 내비바 끝-->
 
-            <div class="bottom-navbar" >
-                <div>
-                    <a class="nav-link" id="homeBtn" th:href="@{/main}">메인</a>
-                    <a class="nav-link" id="communityBtn" th:href="@{/community}">커뮤니티</a>
+<!--            하단 내비바 시작-->
+            <div class="bottom-navbar">
+<!--                카테고리 별 이동 구분-->
+                <div class="w-25 nav nav-tabs">
+                    <a class="nav-link fs-5 text-muted" id="homeBtn" th:href="@{/main}">메인</a>
+                    <a class="nav-link fs-5 text-muted" aria-current="active" id="communityBtn" th:href="@{/community}">커뮤니티</a>
                 </div>
+<!--                카테고리 끝-->
 
+<!--                맵 드롭다운-->
+
+                <div class="dropdown" style="position:absolute; right:50%;">
+                    <button class="btn maps-drop">
+                        <svg th:replace="Maps :: mapsfragment"></svg>
+                    </button>
+                </div>
+<!--                맵 드롭다운 끝-->
+
+<!--                검색바-->
                 <div id="search" class="search-bar">
                     <div>
+<!--                        검색 키워드 받기-->
                         <div class="search-text">
                             <input class="search-content" type="text" id="search_kw"  th:value="${kw}">
                             <input class="search-button" value="검색" type="button" id="btn_search" style="background-color:white;">
                         </div>
                     </div>
-
+<!--                    커뮤니티에 받은 키워드를 갖고 겟요청하기-->
                     <form th:action="@{/community}" method="get" id="searchBar">
                         <input type="hidden" id="keyword" name="kw" th:value="${kw}">
                     </form>
 
+<!--                    찾은 키워드를 첫 페이지부터 뿌려주기-->
                     <form th:action="@{/community}" method="get" id="searchForm">
                         <input type="hidden" id="kw" name="kw" th:value="${kw}">
                         <input type="hidden" id="page" name="page" th:value="${paging.number}">
@@ -41,6 +60,9 @@
                 </div>
             </div>
         </div>
+
+
+
     </div>
 
 <script type='text/javascript'>

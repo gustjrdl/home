@@ -28,24 +28,33 @@ public class CommunityService {
 
     private final CommunityRepository communityRepository;
 
-
     public Page<Community> getList(int page, String kw) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
-        Pageable pageable = PageRequest.of(page, 50, Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         Specification<Community> spec = search(kw);
 
         return this.communityRepository.findAll(spec,pageable);
     }
 
-    public void sangsung( String subject, String content){
-        Community community = new Community();
+    public Page<Community> getIndexList(int page, String kw) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 8, Sort.by(sorts));
+        Specification<Community> spec = search(kw);
 
-        community.setSubject(subject);
-        community.setContent(content);
-        community.setModifyDate(LocalDateTime.now());
-        this.communityRepository.save(community);
+        return this.communityRepository.findAll(spec,pageable);
     }
+
+    public Page<Community> getViewList(int page, String kw) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("view"));
+        Pageable pageable = PageRequest.of(page, 8, Sort.by(sorts));
+        Specification<Community> spec = search(kw);
+
+        return this.communityRepository.findAll(spec,pageable);
+    }
+
     public Community create(CommunityForm communityForm,SiteUser nickname) {
         Community community = Community.builder()
                 .subject(communityForm.getSubject())
@@ -57,7 +66,6 @@ public class CommunityService {
         this.communityRepository.save(community);
         return community;
     }
-
     public void modify(Community community, String subject, String content, String region) {
 
         community.setSubject(subject);

@@ -40,9 +40,6 @@ public class CommentService {
         return this.commentRepository.findAll(pageable);
     }
 
-
-
-
     public Comment getComment(Integer id) {
         Optional<Comment> comment = this.commentRepository.findById(id);
         if (comment.isPresent()) {

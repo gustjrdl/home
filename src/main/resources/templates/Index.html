@@ -3,11 +3,143 @@
 <div layout:fragment="content">
 
     <nav th:replace="NavBar :: NavBarFragment"></nav>
-    <div style="width:1200px; margin:50px auto -100px auto;">지역을 고르시면 관련 글들이 검색 돼요</div>
-    <div style="text-align:center;">
-        <div style="display:inline-block; margin-left:160px;">
-          <svg th:replace="Maps :: mapsfragment"></svg>
+
+    <!--    메인 페이지 컨테이너-->
+    <div style="text-align:center;" class="container-md container">
+
+<!--       메인 배너 캐러셀 컨테이너-->
+        <div class="mt-5" style="max-width:1200px; max-height:360px; margin:0 auto;">
+<!--           메인 배너 캐러셀 시작-->
+            <div id="carouselExampleInterval" class="carousel slide"  data-bs-ride="carousel">
+                <div class="carousel-inner" style="border-radius:10px;"> <!--                    슬라이드 모양 잡아줌-->
+                    <div class="carousel-item active" data-bs-interval="3000">
+                        <img src="http://via.placeholder.com/1100x300" class="img-fluid d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="3000">
+                        <img src="http://via.placeholder.com/1100x300" class="img-fluid w-100 d-block" alt="...">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="3000">
+                        <img src="https://picsum.photos/id/237/1100/300" class="img-fluid w-100 d-block" alt="...">
+                    </div>
+                </div>
+<!--                여기까지 슬라이드-->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+<!--                여기까지 슬라이드 버튼-->
+            </div>
         </div>
+        <!--        메인 배너 캐러셀 끝-->
+
+
+        <!--        실시간 글 캐러셀 시작-->
+        <div class="mt-5">
+<!--            실시간 글 제목-->
+            <div class=" d-flex justify-content-between align-items-center mx-auto" style="width:1200px;">
+                <h2>최신 글</h2>
+                <a th:href="@{/community}">더 보기</a>
+            </div>
+<!--            실시간 글 제목 끝-->
+
+<!--            실시간 글 목록-->
+            <div class="d-flex flex-wrap mx-auto " style="width:1200px;">
+                <div th:each="newCommunity : ${newList}" class="w-25 h-25 ">
+                    <a class="card mx-auto mb-3 shadow p-3 mb-4 bg-body rounded" style="width: 18rem;" th:href="@{|/community/detail/${newCommunity.id}|}">
+<!--                        카드 내용들 시작-->
+                        <div class="card-body m-0 p-0">
+<!--                            닉네임 외 정보들-->
+                            <div class="d-flex pb-3">
+                                <div th:text="${newCommunity.author.nickname}"class="nickname-line w-50" ></div>
+                                <div th:text="${newCommunity.author.id}" class="w-50"></div>
+                            </div>
+<!--                            닉네임 외 정보들 끝-->
+<!--                            지역카드-->
+                            <div class=" border border-white rounded w-25 d-flex region-name-card pt-2 justify-content-center">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <div th:text="${newCommunity.region}"></div>
+                            </div>
+<!--                            지역별 이미지 카드 시작-->
+                            <img th:if="${newCommunity.region} == '제주도'" src="/TripImg/Jeju_img.jpg" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '충북'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '부산'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '대구'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '광주'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '대전'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '울산'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '경기'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '강원'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '충남'" src="/TripImg/Chungnam_img.jpg" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '전북'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '전라남도'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '경상북도'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '경상남도'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+                            <img th:if="${newCommunity.region} == '세종'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">
+<!--                            지역별 이미지 카드 끝-->
+
+                            <div class="card-subtitle mb-2 text-muted"th:text="${newCommunity.subject}"></div>
+                            <div class="card-text" th:text="${newCommunity.content}"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+<!--실시간 글-->
+<!--        <div class="mt-5">-->
+<!--            &lt;!&ndash;            실시간 글 제목&ndash;&gt;-->
+<!--            <div class=" d-flex justify-content-between align-items-center mx-auto" style="width:1200px;">-->
+<!--                <h2>최신 글</h2>-->
+<!--                <a th:href="@{/community}">더 보기</a>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;            실시간 글 제목 끝&ndash;&gt;-->
+
+<!--            &lt;!&ndash;            실시간 글 목록&ndash;&gt;-->
+<!--            <div class="d-flex flex-wrap mx-auto " style="width:1200px;">-->
+<!--                <div th:each="viewCommunity : ${viewContent}" class="w-25 h-25 ">-->
+<!--                    <a class="card mx-auto mb-3 shadow p-3 mb-4 bg-body rounded" style="width: 18rem;" th:href="@{|/community/detail/${viewCommunity.id}|}">-->
+<!--                        &lt;!&ndash;                        카드 내용들 시작&ndash;&gt;-->
+<!--                        <div class="card-body m-0 p-0">-->
+<!--                            &lt;!&ndash;                            닉네임 외 정보들&ndash;&gt;-->
+<!--                            <div class="d-flex pb-3">-->
+<!--                                <div th:text="${viewCommunity.author.nickname}"class="nickname-line w-50" ></div>-->
+<!--                                <div th:text="${viewCommunity.author.id}" class="w-50"></div>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash;                            닉네임 외 정보들 끝&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            지역카드&ndash;&gt;-->
+<!--                            <div class=" border border-white rounded w-25 d-flex region-name-card pt-2 justify-content-center">-->
+<!--                                <i class="bi bi-geo-alt-fill"></i>-->
+<!--                                <div th:text="${viewCommunity.region}"></div>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash;                            지역별 이미지 카드 시작&ndash;&gt;-->
+<!--                            <img th:if="${viewCommunity.region} == '제주도'" src="/TripImg/Jeju_img.jpg" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '충북'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '부산'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '대구'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '광주'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '대전'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '울산'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '경기'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '강원'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '충남'" src="/TripImg/Chungnam_img.jpg" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '전북'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '전라남도'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '경상북도'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '경상남도'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            <img th:if="${viewCommunity.region} == '세종'" src="/TripImg/Chungbuk_img.webp" alt="이미지 없음" class="img-fluid card-title rounded">-->
+<!--                            &lt;!&ndash;                            지역별 이미지 카드 끝&ndash;&gt;-->
+
+<!--                            <div class="card-subtitle mb-2 text-muted"th:text="${viewCommunity.subject}"></div>-->
+<!--                            <div class="card-text" th:text="${viewCommunity.content}"></div>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
+<!--    메인페이지 컨테이너 끝-->
 </div>
 </html>
