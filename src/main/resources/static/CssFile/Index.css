@@ -1,13 +1,12 @@
 .nickname-line {
     position:relative;
 }
-
 .nickname-line::after {
   content: "";
   display:block;
-  width: 2px; /* 세로선의 두께 */
-  height: 10px; /* 세로선의 높이 */
-  background-color:  #CCCCCC; /* 세로선의 색상 */
+  width: 2px;
+  height: 10px;
+  background-color:  #CCCCCC;
   position:absolute;
   right:0;
   top:24%;
@@ -32,34 +31,34 @@
     text-align:center;
 }
 
+.card-subtitle {
+    white-space:normal;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical;
+    width:100%;
+    height:30%;
+}
+
+.card-text {
+    white-space:normal;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    width:100%;
+    height:30%;
+}
+
 .card-body > img {
     width:300px;
     height:160px;
 }
 
-.maps-drop {
-      background-color:#00ce7c;
-      width:100px;
-      height:30px;
-      transition: width 2s, height 2s;
 
-}
-
-.maps-drop > svg {
-    border-radius:10px;
-    margin-left:-160px;
-    transition: width 3s, height 3s, background-color 1s;
-}
-.maps-drop:hover {
-    display:inline-block;
-    background-color:#00ce7c;
-    border-radius:0;
-    height:800px;
-}
-.maps-drop:hover > svg {
-    height:800px;
-    width:400px;
-}
 
 
 

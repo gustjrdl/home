@@ -5,8 +5,12 @@
 <div layout:fragment="content">
     <nav th:replace="NavBar :: NavBarFragment"></nav>
 
+    <div class="mx-auto border border-dark community-top-img" style="max-width:100vw; max-height:360px; overflow:hidden; position:relative;">
+        <h2 class="pb-5" style="text-align:center; position:absolute; top: 50%; left:50%; transform:translate(-50%, -50%); color:#00CE7C; background-color:white;">여행 이야기 나누어 보아요!</h2>
+        <img src="/TripImg/Flower.jpg" class="img-fluid" >
+    </div>
+
     <div class="container-fluid mt-4 mw-50 vh-100">
-        <div class="notice">공지사항</div>
     <!--    게시물-->
             <div class="community_box">
                 <div class="community_line">

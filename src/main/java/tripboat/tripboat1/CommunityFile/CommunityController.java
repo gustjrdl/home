@@ -58,5 +58,18 @@ public class CommunityController {
         return "CommunityContent";
     }
 
+    @GetMapping("?kw={kw}")
+    public String search(@RequestParam(value = "kw", defaultValue = "") String kw, @RequestParam(value="page", defaultValue="0") int page, Model model) {
+        Page<Community> searchResult = communityService.getList(page, kw);
+
+        if (searchResult.isEmpty()) {
+            model.addAttribute("message", "검색 결과가 없습니다.");
+        } else {
+            model.addAttribute("searchResult", searchResult);
+        }
+
+        return "CommunityMain";
+    }
+
 
 }

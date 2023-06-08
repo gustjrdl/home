@@ -7,8 +7,9 @@
     padding:15px;
 }
 
-.login_img{
-    width:500px;
+community-top-img img{
+    width:2000px;
+    max-height:initial;
     margin-left:auto;
     margin-right:auto;
 }
@@ -88,7 +89,6 @@
     overflow-x:hidden;
     overflow-y:hidden;
     text-overflow:ellipsis;
-
 }
 .article_content {
     white-space:normal;

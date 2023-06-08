@@ -56,10 +56,7 @@ public class UserController {
         return "LoginForm";
     }
 
-    @RequestMapping("login_errors")
-    private String login_err () {
-        return "LoginError";
-    }
+
 
 //    @RequestMapping("")
 //    private String loginUser(Model model,@PathVariable("users") String user) {
@@ -70,7 +67,7 @@ public class UserController {
 
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
-    public String login() {
+    public String login(Principal principal) {
 
         return "LoginForm";
     }
@@ -87,16 +84,21 @@ public class UserController {
 
     @PostMapping("/login")
     public String LoginClear(Principal principal){
-        if(principal.equals(principal.getName())){
+
+        if(principal.equals(principal.getName()))
+        {
         String str = "<script>";
         str+="alert('로그인 되었습니다')";
         str+="</script>";
         return str;
         }
 
-        
+        else if (principal.toString().isEmpty()){
 
-        return "token";
+            return "LoginError";
+        }
+
+        return "LoginForm";
     }
 
 //    @ResponseBody

@@ -31,7 +31,7 @@ public class CommunityService {
     public Page<Community> getList(int page, String kw) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page, 20, Sort.by(sorts));
         Specification<Community> spec = search(kw);
 
         return this.communityRepository.findAll(spec,pageable);

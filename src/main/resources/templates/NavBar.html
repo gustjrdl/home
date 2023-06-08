@@ -12,13 +12,43 @@
 
 <!--            로고 라인 상단 내비바-->
             <nav class="navbar">
-                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}" style=" font-weight:bold; font-size:18px;">로그인</a>
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}" style="font-weight:bold; font-size:18px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">로그인</a>
+
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">로그인</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form th:action="@{/user/login}" method ="post">
+                                    <div class="form-outline mb-3" style="text-align:center;">
+                                        <label for="username"></label>
+                                        <input type="text" name="username" id="username" placeholder="아이디를 입력 해주세요" style="width:200px; height: 40px; border-radius:5px; border:1px solid gray; padding: 10px;">
+                                    </div>
+                                    <div class="form-outline mb-3" style="text-align: center;">
+                                        <label for="password"></label>
+                                        <input type="password" name="password" id="password" placeholder="비밀번호를 입력 해주세요" style="width:200px; height: 40px; border-radius:5px; border:1px solid gray; padding: 10px;">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a th:href="@{/user/signup}" class="btn btn-primary" >회원가입</a>
+                                        <button type="submit" class="btn btn-primary">로그인</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                     <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/signup}" style="font-weight:bold; font-size:18px; " >회원가입</a>
                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}" style=" font-weight:bold; font-size:18px;">로그아웃</a>
                     <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/mypage}" style=" font-weight:bold; font-size:18px; ">마이페이지</a>
                     <button class="writer btn" th:onclick="|location.href='@{/writer/content}'|"> 글쓰기</button>
             </nav>
 <!--            상단 내비바 끝-->
+
 
 <!--            하단 내비바 시작-->
             <div class="bottom-navbar">
@@ -29,10 +59,10 @@
                 </div>
 <!--                카테고리 끝-->
 
-<!--                맵 드롭다운-->
-
-                <div class="dropdown" style="position:absolute; right:50%;">
+<!--                맵 드롭다운 시작-->
+                <div class="dropdown" style="position:absolute; right:50%; top:20px; text-align:center;">
                     <button class="btn maps-drop">
+                        <div style="color:white;">지도 보기</div>
                         <svg th:replace="Maps :: mapsfragment"></svg>
                     </button>
                 </div>

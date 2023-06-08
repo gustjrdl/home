@@ -7,6 +7,8 @@
       box-shadow: rgba(0,0,0,0.08) 0px 1px 2px;
       z-index:9990;
 }
+/*헤더 레이아웃 틀*/
+
 .home-container {
     display:flex;
     align-items:space-between;
@@ -18,6 +20,7 @@
     margin:0 auto;
 
 }
+
 .home-logo {
     display:inline-block;
     width:300px;
@@ -42,7 +45,7 @@
 
 }
 .writer {
-    border-radius:50%;
+    border-radius:12px;
     background-color:#00ce7c;
     width:100px;
     height:40px;
@@ -58,21 +61,58 @@
     border:1px solid #00ce7c;
 }
 
+/*여기까지 상단 내비바*/
+
+/*여기부터 하단 내비바*/
 .bottom-navbar {
     width:1200px;
     display:flex;
     justify-content:space-between;
 }
 
+/*여기부터 맵 드롭다운 버튼*/
 
+.maps-drop {
+      background-color:#04B404;
+      width:100px;
+      height:100px;
+      border-radius:50%;
+      transition: width 2s, height 2s;
+}
+.maps-drop:hover {
+    display:inline-block;
+    background-color:#04B404;
+    height:800px;
+    width:600px;
+    border-radius:50%;
+}
+
+.maps-drop > svg {
+    display:none;
+    margin-left:-60px;
+    margin-top:-120px;
+    transition: width 3s, height 1s, background-color 1s;
+}
+
+.maps-drop:hover > svg {
+    display:inline-block;
+    height:800px;
+    width:400px;
+}
+/*맵 드롭다운 끝*/
+
+/*검색바*/
 .search-bar {
     display:flex;
     align-items:center;
 }
 
+/*검색 내용*/
 .search-content {
     width:100%;
 }
+
+/*검색 글씨 버튼*/
 .search-button{
     right:10px;
     height:30px;

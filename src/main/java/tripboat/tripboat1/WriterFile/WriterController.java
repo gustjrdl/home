@@ -40,7 +40,7 @@ public class WriterController {
     private final UserService userService;
 
     @RequestMapping("/content")
-    private String WriterSearch(Model model, @RequestParam("file") List<MultipartFile> file, @RequestParam(value="page", defaultValue="1") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
+    private String WriterSearch(Model model, @RequestParam(value="page", defaultValue="1") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
 
         Page<Community> paging = this.communityService.getList(page, kw);
         model.addAttribute("kw", kw);
@@ -56,12 +56,17 @@ public class WriterController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/content")
-    public String WriterDate (Model model, @Valid CommunityForm communityForm, BindingResult bindingResult, Principal principal,
-                              @RequestParam(value="files", required = false) List<MultipartFile> files) throws IOException {
+    public String WriterDate (Model model, @Valid CommunityForm communityForm, BindingResult bindingResult, Principal principal ) throws IOException {
 
         Community article = communityService.create(communityForm,userService.getUser(principal.getName()));
-        if (bindingResult.hasErrors()) return "Writer";
 
+        if (bindingResult.hasErrors()) {
+
+            return "redirect:/";
+        }
+        if (article.getContent()==null){
+            return "redirect:/writer/content";
+        }
         return "redirect:/community";
     }
 
