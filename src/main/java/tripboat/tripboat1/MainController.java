@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tripboat.tripboat1.CommunityFile.Community;
 import tripboat.tripboat1.CommunityFile.CommunityService;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,14 +40,7 @@ public class MainController {
         model.addAttribute("newList",page1);
         model.addAttribute("viewContent",viewContent);
 
-
-
-
-
         return "Index";
     }
-
-
-
 
 }

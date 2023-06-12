@@ -3,16 +3,18 @@
     <div layout:fragment="content">
         <nav th:replace="SignNavBar :: SignNavBarFragment"></nav>
         <div style="margin:0 auto 20px auto; font-weight:bold; font-size:30px; text-align:center; ">로그인</div>
+
             <div style="margin:0 auto; display:flex; justify-content:center;">
-            <form th:action="@{/user/login}" method ="post" style="display:inline-block;">
+
+            <form th:action="@{/user/login}" method ="post" style="display:inline-block;"class="border border-dark">
                 <div class="form-outline mb-4" style="text-align:center;">
-                    <label for="username"></label>
                     <input type="text" name="username" id="username" placeholder="아이디를 입력 하세요" style="width:330px; height: 60px; border-radius:5px; border:1px solid gray; padding: 10px; font-family: 'Do Hyeon', sans-serif;">
+                    <label for="username"></label>
                 </div>
 
                 <div class="form-outline mb-4" style="text-align: center;">
-                    <label for="password"></label>
                     <input type="password" name="password" id="password" placeholder="비밀번호를 입력 하세요" style="width:330px; height: 60px; border-radius:5px; border:1px solid gray; padding: 10px; font-family: 'Do Hyeon', sans-serif;">
+                    <label for="password"></label>
                 </div>
 
                 <div th:if="@{/user/login/?error}" class="mb-2">

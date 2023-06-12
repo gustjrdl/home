@@ -26,15 +26,6 @@ public class CommunityController {
     private final CommunityService communityService;
     private final UserService userService;
 
-    @RequestMapping("")
-    private String list(Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
-        Page<Community> paging = this.communityService.getList(page, kw);
-
-        model.addAttribute("kw", kw);
-        model.addAttribute("paging", paging);
-
-        return "CommunityMain";
-    }
     @GetMapping("")
     private String community(Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
         Page<Community> paging = this.communityService.getList(page, kw);
@@ -58,18 +49,6 @@ public class CommunityController {
         return "CommunityContent";
     }
 
-    @GetMapping("?kw={kw}")
-    public String search(@RequestParam(value = "kw", defaultValue = "") String kw, @RequestParam(value="page", defaultValue="0") int page, Model model) {
-        Page<Community> searchResult = communityService.getList(page, kw);
-
-        if (searchResult.isEmpty()) {
-            model.addAttribute("message", "검색 결과가 없습니다.");
-        } else {
-            model.addAttribute("searchResult", searchResult);
-        }
-
-        return "CommunityMain";
-    }
 
 
 }

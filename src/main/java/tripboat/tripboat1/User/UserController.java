@@ -56,8 +56,6 @@ public class UserController {
         return "LoginForm";
     }
 
-
-
 //    @RequestMapping("")
 //    private String loginUser(Model model,@PathVariable("users") String user) {
 //        List<SiteUser> users = (List<SiteUser>) userService.getUser(user);
