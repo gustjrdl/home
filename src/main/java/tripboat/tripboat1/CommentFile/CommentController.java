@@ -41,22 +41,23 @@ public class CommentController {
         SiteUser siteUser = this.userService.getUser(principal.getName());
         Page<Community> paging = this.communityService.getList(page, kw);
 
-        model.addAttribute("kw", kw);
-        model.addAttribute("paging", paging);
-
         if(bindingResult.hasErrors())
         {
             model.addAttribute("community", community);
             return "CommunityContent";
         }
 
+        model.addAttribute("kw", kw);
+        model.addAttribute("paging", paging);
+
         this.commentService.create(community, content, siteUser);
 
         return String.format("redirect:/community/detail/%s", id);
     }
+    
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String commentModify(CommentForm commentForm, @PathVariable("id") Integer id ) {
+    public String commentModify(@PathVariable("id") Integer id ) {
 
         Comment comment = this.commentService.getComment(id);
 
@@ -70,11 +71,11 @@ public class CommentController {
                                 BindingResult bindingResult,
                                @PathVariable("id") Integer id, Principal principal) {
 
+        Comment comment = this.commentService.getComment(id);
+
         if (bindingResult.hasErrors()) {
             return "CommentEdit";
         }
-
-        Comment comment = this.commentService.getComment(id);
 
         if (!comment.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");

@@ -32,9 +32,12 @@ public class CommunityService {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 20, Sort.by(sorts));
-        Specification<Community> spec = search(kw);
-
-        return this.communityRepository.findAll(spec,pageable);
+        if (kw != null && !kw.isEmpty()) {
+            Specification<Community> spec = search(kw);
+            return this.communityRepository.findAll(spec, pageable);
+        } else {
+            return this.communityRepository.findAll(pageable);
+        }
     }
 
     public Page<Community> getIndexList(int page, String kw) {
@@ -79,6 +82,7 @@ public class CommunityService {
         this.communityRepository.delete(community);
     }
 
+
     public Community getCommunity(Integer id) {
         Optional<Community> community = this.communityRepository.findById(id);
         if (community.isPresent()) {
@@ -89,6 +93,7 @@ public class CommunityService {
         } else {
             throw new DataNotFoundException("community not found");
         }
+
     }
 
     private Specification<Community> search(String kw) {

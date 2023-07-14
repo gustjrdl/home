@@ -28,10 +28,12 @@ public class CommunityController {
 
     @GetMapping("")
     private String community(Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
-        Page<Community> paging = this.communityService.getList(page, kw);
+        Page<Community> getList = this.communityService.getList(page, kw);
+        Page<Community> viewList = this.communityService.getViewList(page, kw);
 
         model.addAttribute("kw", kw);
-        model.addAttribute("paging", paging);
+        model.addAttribute("paging", getList);
+        model.addAttribute("viewList", viewList);
 
         return "CommunityMain";
     }

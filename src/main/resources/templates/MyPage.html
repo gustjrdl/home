@@ -3,31 +3,150 @@
 <div layout:fragment="content">
         <nav th:replace="SignNavBar :: SignNavBarFragment"></nav>
 
+<!--    마이페이지 전체 컨테이너-->
     <div class="mypage-container">
 
-        <div class="mypage-category">
-
+<!--        마이페이지 카테고리 선택-->
+        <div class="mypage-category h-25 border border-dark" style="width:300px;" >
             <div>
-                <a href="">회원정보</a>
-            </div>
-            <div>
-                <a href="">작성글</a>
-                <a href="">글</a>
-                <a href="">코멘트</a>
+                <a id="communityBtn" th:href="@{/mypage/content}" style="font-size:24px;" class="d-block">작성글</a>
+                <a id="communityBtn2"th:href="@{/mypage/content}" class="d-block">글</a>
+                <a id="commentBtn" th:href="@{/mypage/comment}" class="d-block" >코멘트</a>
             </div>
 
+            <div>
+                <a th:href="@{/mypage/profile}" id="profile-data" style="font-size:24px; margin-top:20px;" class="d-block">회원정보</a>
+            </div>
         </div>
-        <div class="my-community-container">
-            <a th:href="@{|/community/detail/${Community.id}|}" th:each="Community : ${paging}">
-                <div class="my-community-frame" th:if="${name.nickname} == ${Community.author.nickname}">
-                    <div th:text="${Community.region}"></div>
-                    <div  th:text="${Community.subject}"></div>
-                    <div th:href="@{|/community/detail/${Community.id}|}" th:text="${Community.content}"></div>
+<!--        마이페이지 선택 끝-->
+
+<!--        작성 글 분류-->
+        <div th:if="${categoryState} == 0" class="my-community container">
+            <div class="th d-flex justify-content-around p-1 w-100 ">
+                <div>지역</div>
+                <div style="margin:0 -112px;">제목</div>
+                <div>내용</div>
+            </div>
+<!--            글 정보-->
+            <a  th:href="@{|/community/detail/${Community.id}|}"
+                th:each="Community : ${paging}"
+                th:if="${name.nickname == Community.author.nickname && Community.content != null}" >
+
+                <div class="d-flex justify-content-between p-1 w-75"  style="margin:0 auto;">
+                    <div th:text="${Community.region}" ></div>
+                    <div th:text="${Community.subject}" style="margin:0 60px;"></div>
+                    <div th:href="@{|/community/detail/${Community.id}|}" th:text="${Community.content}"  ></div>
                 </div>
             </a>
+<!--                글 정보 끝-->
+
+<!--         작성 글 페이징 버튼 시작-->
+            <div th:if="${!paging.isEmpty()}">
+                <ul class="pagination justify-content-center align-items-end">
+                    <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{|?page=${paging.number-1}|}">
+                            <span>이전</span>
+                        </a>
+                    </li>
+                    <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                        th:if="${page >= paging.number-4 and page <= paging.number+4}"
+                        th:classappend="${page == paging.number} ? 'active'"
+                        class="page-item">
+                        <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                        <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                            <span>다음</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+<!--            페이징 버튼 끝-->
         </div>
+<!--        마이페이지 작성 글 목록 끝-->
+
+        
+
+<!--        마이페이지 코멘트 시작-->
+        <div th:if="${categoryState} == 1" style="width:700px;" class="h-100 my-comment container">
+                <div class="th d-flex justify-content-around p-1 w-100 ">
+                    <div>작성자</div>
+                    <div style="margin:0 -112px;">제목</div>
+                    <div>코멘트</div>
+                </div>
+
+            <a th:href="@{|/community/detail/${commentList.community.id}|}"
+               th:if="${commentList.author.nickname}== ${name.nickname}"
+               th:each="commentList : ${commentList}" style="margin:8px auto;">
+
+                <div class="d-flex justify-content-between p-1 w-75" style="margin:0 auto;">
+                    <div th:text="${commentList.community.author.nickname}"></div>
+                    <div th:text="${commentList.community.subject}" style="margin:0 60px;"></div>
+                    <div  th:text="${commentList.content}"></div>
+                </div>
+            </a>
+
+            <div th:if="${!commentList.isEmpty()}">
+                <ul class="pagination justify-content-center align-items-end">
+                    <li class="page-item" th:classappend="${!commentList.hasPrevious} ? 'disabled'">
+                        <a class="page-link" th:href="@{|?commentList=${commentList.number-1}|}">
+                            <span>이전</span>
+                        </a>
+                    </li>
+                    <li th:each="page: ${#numbers.sequence(0, commentList.totalPages-1)}"
+                        th:if="${page >= commentList.number-4 and page <= commentList.number+4}"
+                        th:classappend="${page == commentList.number} ? 'active'"
+                        class="page-item">
+                        <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${!commentList.hasNext} ? 'disabled'">
+                        <a class="page-link" th:href="@{|?commentList=${commentList.number+1}|}">
+                            <span>다음</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+<!--        마이페이지 코멘트 끝-->
+
+<!--        나의 회원 정보 시작-->
+        <div th:if="${categoryState} == 2" th:each="myData :${myData}" style="width:700px;" class="border border-dark">
+            <div th:text="${myData.nickname}"></div>
+            <div th:text="${myData.email}"></div>
+            <div th:text="${myData.username}"></div>
+        </div>
+<!--        나의 회원 정보 끝-->
+
+
     </div>
 
+    <script type="text/javascript">
+      const profileURL = window.location.pathname;
+      const profileBtn = document.getElementById("profile-data");
+      const communityBtn = document.getElementById("communityBtn");
+      const communityBtn2 = document.getElementById("communityBtn2");
+      const profileCommentBtn = document.getElementById("commentBtn");
+
+      if( profileURL === "/mypage/profile" ){
+          profileBtn.style.color= "#00CE7C";
+          profileBtn.style.fontWeight = "bold";
+      }
+      else if (profileURL === "/mypage/content" || profileURL === "/mypage" ) {
+          communityBtn.style.color = "#00CE7C";
+          communityBtn.style.fontWeight = "bold";
+          communityBtn2.style.color = "#00CE7C";
+          communityBtn2.style.fontWeight = "bold";
+      }
+      else if (profileURL === "/mypage/comment") {
+          communityBtn.style.color = "#00CE7C";
+          communityBtn.style.fontWeight = "bold";
+          profileCommentBtn.style.color = "#00CE7C";
+          profileCommentBtn.style.fontWeight = "bold";
+
+      }
+    </script>
 </div>
 </html>
+
 

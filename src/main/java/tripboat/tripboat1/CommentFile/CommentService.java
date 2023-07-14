@@ -32,10 +32,10 @@ public class CommentService {
         this.commentRepository.save(cmt);
     }
 
-    public Page<Comment> getList(int page) {
+    public Page<Comment> getCommentList(int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
-        Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page, 8, Sort.by(sorts));
 
         return this.commentRepository.findAll(pageable);
     }

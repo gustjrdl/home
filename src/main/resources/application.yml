@@ -1,5 +1,5 @@
 server:
-  port: 8084
+  port: 8080
 
 spring:
   devtools:
@@ -11,9 +11,8 @@ spring:
       cache: false
   freemarker:
     cache: false
+
   datasource:
-
-
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/travel
     username: root

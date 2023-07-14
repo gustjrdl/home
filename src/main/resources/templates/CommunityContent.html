@@ -25,7 +25,7 @@
                         <div th:text="${community.author.nickname}"></div>
                     </div>
 
-                    <form th:action="@{|/mypage/user/${community.author.nickname}|}" method="post">
+                    <form th:action="@{|/user/${community.author.nickname}|}" method="post">
                         <input type="hidden"  th:name="userNickname" th:value="${community.author.nickname}">
                         <input class="profile-button nav-link" type="submit" th:value="프로필">
                     </form>
@@ -66,8 +66,7 @@
             </div>
 
             <div style="width:800px;" th:each="comment : ${community.commentList}">
-
-                <div th:if="${community.author != null}" th:text="${community.author.nickname}"></div>
+                <div th:if="${community.author != null}" th:text="${comment.author.nickname}"></div>
                 <div class="comment-date" th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                 <div th:text="${comment.content}" style="display:inline-block;"></div>
                 <!--        코멘트 정보 및 내용-->

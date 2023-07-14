@@ -36,6 +36,26 @@ public class SearchController {
         return "CommunityMain";
     }
 
+
+    @RequestMapping(value = {"/main",""})
+    public String main (Model model,
+                        @RequestParam(value="page", defaultValue="0") int page,
+                        @RequestParam(value = "kw", defaultValue ="") String kw) {
+
+        Page<Community> page1 = this.communityService.getIndexList(page, kw);
+
+        Page<Community> paging = this.communityService.getList(page, kw);
+
+        Page<Community> viewContent = this.communityService.getViewList(page, kw);
+
+        model.addAttribute("kw", kw);
+        model.addAttribute("paging", paging);
+        model.addAttribute("newList",page1);
+        model.addAttribute("viewContent",viewContent);
+
+        return "Index";
+    }
+
     @RequestMapping("")
     private String handleRequest(Model model, Principal principal, @RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "kw", defaultValue = "") String kw) {
         // 공통으로 수행할 로직
