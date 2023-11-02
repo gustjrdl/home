@@ -1,0 +1,48 @@
+package tripboat.tripboat1.User;
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import tripboat.tripboat1.CommentFile.Comment;
+import tripboat.tripboat1.CommunityFile.Community;
+import tripboat.tripboat1.CommunityFile.CommunityDto;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Data
+public class SiteUser {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
+    private String username;
+
+    private String password;
+
+    @Column(unique = true)
+    private String Email;
+
+    @Column(unique = true)
+    private String nickname;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    private List<Community> communityList;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    private List<Comment> commentList;
+//    @Column
+//    private String region;
+//
+//    @Column
+//    private byte age;
+//
+//    @Column
+//    private String sex;
+
+
+
+}

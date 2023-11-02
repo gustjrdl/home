@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'MaplestoryOTFBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+html > body {
+    font-family: "GangwonEdu_OTFBoldA";
+}
+body {
+    padding-top: 140px;
+}
+ul, li, a {
+    margin:0;
+    padding:0;
+    list-style:none;
+    text-decoration:none;
+    color:inherit
+
+}
