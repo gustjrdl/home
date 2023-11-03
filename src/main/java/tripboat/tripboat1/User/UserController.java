@@ -26,11 +26,12 @@ public class UserController {
 
 
     @PostMapping("/signup")
-    public String createSignup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
+    public String createSignup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult, Model model) {
 
         if(bindingResult.hasErrors()) {
             return "SignupForm";
         }
+
 
         if (!userCreateForm.getPassword1().equals(userCreateForm.getPassword2())) {
             bindingResult.rejectValue("password2", "passwordInCorrect", "비밀번호가 일치하지 않습니다.");
@@ -69,20 +70,6 @@ public class UserController {
 
     @PostMapping("/login")
     public String LoginClear(Principal principal){
-
-        if(principal.equals(principal.getName()))
-        {
-        String str = "<script>";
-        str+="alert('로그인 되었습니다')";
-        str+="</script>";
-        return str;
-        }
-        else if (principal.toString().isEmpty()){
-            String str = "<script>";
-            str+="alert('아이디를 입력해주세요')";
-            str+="</script>";
-            return str;
-        }
 
         return "LoginForm";
     }

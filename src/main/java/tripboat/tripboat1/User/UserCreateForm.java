@@ -27,7 +27,7 @@ public class UserCreateForm {
     private String email;
 
     @NotBlank(message = "닉네임이 입력되지 않았습니다.")
-    @Pattern(regexp = "[가-힣].{2,10}", message = "닉네임은 3~10사이 한글로 사용해주세요")
+    @Pattern(regexp = "[가-힣].{1,10}", message = "닉네임은 2~10사이 한글로 사용해주세요")
     private String nickname;
 
 }

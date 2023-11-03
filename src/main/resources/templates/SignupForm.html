@@ -5,74 +5,150 @@
     <nav th:replace="SignNavBar :: SignNavBarFragment"></nav>
     <div style="0 auto 20px auto; font-weight:bold; font-size:30px; text-align:center;">회원가입</div>
     <div style="display:flex; justify-content:center;">
-        <form th:action="@{/user/signup}" th:object="${userCreateForm}" id="signup" method ="post" style=" display:flex; justify-content:center; flex-wrap:wrap; width:330px;">
+        <form th:action="@{/user/signup}" th:object="${userCreateForm}" id="signup" method ="post" style=" display:flex; justify-content:center; flex-wrap:wrap; width:360px;">
+            <div style="position:relative;" class="w-100">
+                <input type="text" id="username" th:field="*{username}" class="w-75 h-4" placeholder="아이디를 입력 해주세요" style="border-radius:5px; border:1px solid gray; padding:10px;position:relative; font-family: 'Do Hyeon', sans-serif;">
+                <label for="username" id="idError" class="d-block"   style="position:absolute; font-size:14px;"></label>
+                <div th:if="${#fields.hasError('username')}"th:each="error : ${#fields.errors('username')}" th:text="${error}"></div>
+            </div>
 
-            <label for="username"></label>
-            <input type="text" id="username" th:field="*{username}" placeholder="아이디를 입력 하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px; margin-bottom:30px; background-color:#f5f6f7; font-family: 'Do Hyeon', sans-serif;">
-            <span th:if="${#fields.hasErrors('username')}" id="idError" th:each="err : ${#fields.errors('username')}"></span>
-            <!--                    and #fields.errors('username').get(0).codes[0] == 'NotBlank'}-->
-            <p ></p>
+            <div style="position:relative;" class="w-100">
+                <input type="password" id="password1" th:field="*{password1}" class="w-100 h-4 mt-4" placeholder="비밀번호를 입력 하세요" style="height: 58px; border-radius:5px; border:1px solid gray; padding:10px; font-family: 'Do Hyeon', sans-serif;">
+                <label for="password1" id="passwordError" class="d-block" style="position:absolute; font-size:14px;"></label>
+            </div>
 
-            <label for="password1"></label>
-                <input type="password" id="password1" th:field="*{password1}"  placeholder="비밀번호를 입력 하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px; margin-bottom:30px; background-color:#f5f6f7; font-family: 'Do Hyeon', sans-serif;">
-                <div th:if="${#fields.hasErrors('password1')}" style="margin-top:-30px;">
-<!--                    <p th:errors="*{password1}" style="color:red; font-size:14px; font-family: 'Do Hyeon', sans-serif;"></p>-->
-                </div>
-                <label for="password2"></label>
-                <input type="password" id="password2" th:field="*{password2}"  placeholder="비밀번호를 다시 한 번 입력하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px; margin-bottom:30px; background-color:#f5f6f7; font-family: 'Do Hyeon', sans-serif;">
-                <div th:if="${#fields.hasErrors('password2')}" style="margin-top:-30px;">
-<!--                    <p th:errors="*{password2}" style="color:red; font-size:14px; font-family: 'Do Hyeon', sans-serif;"></p>-->
-                </div>
-                <label for="email"></label>
-                <input type="text" id="email" th:field="*{email}" placeholder="이메일을 입력 하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px; margin-bottom:30px; background-color:#f5f6f7; font-family: 'Do Hyeon', sans-serif;">
-                <div th:if="${#fields.hasErrors('email')}" style="margin-top:-30px;">
-<!--                    <p th:errors="*{email}" style="color:red; font-size:14px;  font-family: 'Do Hyeon', sans-serif;"></p>-->
-                </div>
-                <label for="nickname"></label>
-                <input type="text" id="nickname" th:field="*{nickname}" placeholder="닉네임을 입력 하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px; margin-bottom:30px; background-color:#f5f6f7; font-family: 'Do Hyeon', sans-serif;">
-                <div th:if="${#fields.hasErrors('nickname')}" style=" margin-top:-30px; padding:0; display:inline-block;">
-<!--                    <div th:errors="*{nickname}" style="color:red; font-size:14px; font-family:'Do Hyeon', sans-serif; "></div>-->
-                </div>
-                <button class="btn" type="submit"  style=" margin-top:30px; width:300px; height: 58px; border-radius:5px; font-weight:bold;
-                                        font-size: 30px; background-color:#00ce7c; font-family: 'Do Hyeon', sans-serif; color:white; padding:5px; " >회원가입
-                </button>
+            <div style="position:relative;" class="w-100">
+                <input type="password" id="password2" th:field="*{password2}" class="w-100 h-4 mt-4" placeholder="비밀번호를 다시 한 번 입력하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px;font-family: 'Do Hyeon', sans-serif;">
+                <label for="password2" id="passwordError2" class=" d-block" style="position:absolute; font-size:14px;"></label>
+            </div>
+
+            <div style="position:relative;" class="w-100">
+                <input type="text" id="nickname" th:field="*{nickname}" class="w-100 h-4 mt-4" placeholder="닉네임을 입력 하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px; font-family: 'Do Hyeon', sans-serif;">
+                <label for="nickname" id="nicknameError" class="d-block" style="position:absolute; font-size:14px;"></label>
+            </div>
+
+            <div style="position:relative;" class="w-100">
+                <input type="text" id="email" th:field="*{email}" class="w-100 h-4 mt-4" placeholder="이메일을 입력 하세요" style="width:327px; height: 58px; border-radius:5px; border:1px solid gray; padding:10px;font-family: 'Do Hyeon', sans-serif;">
+                <label for="email" id="emailError" class=" d-block" style="position:absolute; font-size:14px;"></label>
+            </div>
+
+            <button class="btn" id="sign_submit" type="submit"  style=" margin-top:30px; width:300px; height: 58px; border-radius:5px; font-weight:bold;
+                                        font-size: 30px; background-color:#00ce7c; font-family: 'Do Hyeon', sans-serif; color:white; padding:5px; " >회원가입</button>
         </form>
     </div>
     <script type="text/javascript">
     const form = document.getElementById('signup');
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const idInput = document.getElementById('username');
-        const idError = document.getElementById('idError');
+    const idInput = document.getElementById('username');
+    const psInput = document.getElementById('password1');
+    const psInput2 = document.getElementById('password2');
+    const emailInput = document.getElementById('email');
+    const nicknameInput = document.getElementById('nickname');
 
-        if (idInput && idError) {
-            // 요소를 찾았으므로 이제 안전하게 작업을 수행할 수 있습니다.
-        } else {
-            console.log('요소를 찾을 수 없습니다.');
+    const idError = document.getElementById('idError');
+    const psError = document.getElementById('passwordError');
+    const psError2 = document.getElementById('passwordError2');
+    const emailError = document.getElementById('emailError');
+    const nicknameError = document.getElementById('nicknameError');
+
+    window.addEventListener('keydown', function (e) {
+        if (e.key === "Enter" || e.keyCode === 13) {
+            e.preventDefault();
         }
     });
 
     idInput.addEventListener('input', function (e) {
         const idValue = idInput.value;
+        const idPattern = /^[a-zA-Z0-9].{3,16}$/;
+        idError.textContent = ''; // 초기화
 
         // 실시간 아이디 유효성 검사를 수행
-        if (idValue.length < 4) {
-            idError.textContent = '아이디는 최소 4자 이상이어야 합니다.';
-        } else {
-            idError.textContent = ''; // 유효한 경우 에러 메시지 제거
+        if (idValue !== null) {
+            if (!idPattern.test(idValue)) {
+                idError.textContent = "아이디는 영문 대/소문자와 숫자로 4~16글자를 사용해주세요";
+            }
         }
     });
 
-    form.addEventListener('submit', function (event) {
+    psInput.addEventListener('input', function (e) {
+        const psValue = psInput.value;
+        const psPattern = /[0-9].{3,16}$/;
+        psError.textContent = '';
+
+        if (psValue !== null) {
+            if (!psPattern.test(psValue)) {
+                psError.textContent = "비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 포함해주세요.";
+            }
+        }
+    });
+
+    psInput2.addEventListener('input', function (e) {
+        const psValue2 = psInput2.value;
+        const psValue = psInput.value;
+
+        psError2.textContent = ''; // 초기화
+
+        if (psValue2 !== null) {
+            if (psValue2 !== psValue) {
+                psError2.textContent = "비밀번호가 일치하지 않습니다.";
+            }else {
+                psError2.textContent = '비밀번호가 일치합니다.';
+                psError2.style.color = 'green';
+            }
+        }
+    });
+
+    emailInput.addEventListener('input', function (e) {
+        const emailValue = emailInput.value;
+        const emailPattern = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        emailError.textContent = ''; // 초기화
+
+        // 실시간 아이디 유효성 검사를 수행
+        if (emailValue !== null) {
+            if (!emailPattern.test(emailValue)) {
+                emailError.textContent = "이메일 형식으로 작성해주세요. ex)username@gmail.com";
+            }
+        }
+    });
+
+    nicknameInput.addEventListener('input', function (e) {
+        const nickValue = nicknameInput.value;
+        const nickPattern = /[가-힣].{1,10}/;
+        nicknameError.textContent = ''; // 초기화
+
+        // 실시간 아이디 유효성 검사를 수행
+        if (nickValue !== null) {
+            if (!nickPattern.test(nickValue)) {
+                nicknameError.textContent = "닉네임은 2~10글자 한글로 설정해주세요.";
+            }
+        }
+    });
+
+    form.addEventListener('submit', function (e) {
         const idValue = idInput.value;
+        const psValue = psInput.value;
+        const psValue2 = psInput2.value;
+        const emailValue = emailInput.value;
+        const nicknameValue = nicknameInput.value;
 
-        // 폼을 제출할 때 다시 한 번 아이디 유효성 검사 수행
-        if (idValue.length < 4) {
-            idError.textContent = '아이디는 최소 4자 이상이어야 합니다.';
-            event.preventDefault(); // 제출 중지
+        // 폼을 제출할 때 각 필드의 유효성 검사 수행
+        if (idValue.length < 1 || !/^[a-zA-Z0-9].{3,16}$/.test(idValue)) {
+            idError.textContent = '아이디를 입력해주세요.';
+            e.preventDefault();
+        }else if (psValue.length < 1) {
+            psError.textContent = '비밀번호를 입력해주세요.';
+            e.preventDefault();
+        } else if (psValue2.length < 1) {
+            psError2.textContent = '비밀번호를 한번 더 입력해주세요.';
+            e.preventDefault();
+        }else if (nicknameValue.length < 1) {
+            nicknameError.textContent = '닉네임을 입력해주세요.';
+            e.preventDefault();
+        } else if (emailValue.length < 1) {
+            emailError.textContent = '이메일을 입력해주세요.';
+            e.preventDefault();
         }
     });
-
 </script>
 </div>
 
